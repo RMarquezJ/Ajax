@@ -18,17 +18,19 @@
           <!--aquí se mostrarán todos-->
         </div>
       </div>
-      <div  id="rightscreen" class="col-2 background-warning ms-5 text-capitalize">
-        <ul class='border border-5 px-3 border-danger list-unstyled'>
-          <li class=" text-uppercase fw-bold">
+      <div  id="rightscreen" class="col-3 mt-3 background-warning text-capitalize">
+        <ul class='border border-5 p-3 border-danger list-unstyled'>
+          <li class=" text-uppercase text-center fw-bold">
             <span id="name"></span> <!--nombre-->
           </li>
-          <li>Normal <!--sprite normal-->
+          <li class="text-center"><!--sprite normal-->
             <span id="normal"></span>
-            <hr>
+            Normal
           </li>
-          <li>Shiny <!--sprite shiny-->
+          <hr>
+          <li class="text-center"> <!--sprite shiny-->
             <span id="shiny"></span>
+            Shiny
           </li>
           <hr>
           <li class="text-left">Tipo: <!--tipo-->
@@ -60,9 +62,9 @@
 
         $('#name').html(data.name);
 
-        $('#normal').html(`<div class="col-1"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokeid}.png"></div>`);
+        $('#normal').html(`<div><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokeid}.png"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/${pokeid}.png"></div>`);
 
-        $('#shiny').html(`<div class="col-1"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/${pokeid}.png"></div>`);
+        $('#shiny').html(`<div><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/${pokeid}.png"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/shiny/${pokeid}.png"></div>`);
 
         $('#height').html(data.height);
 
@@ -71,7 +73,8 @@
         for (type of data.types) {
           $('#type').append(`<li>${type.type.name}</li>`);
         }
-      })
+      });
+      $('#type').children().remove('li');
     });
 
   </script>
