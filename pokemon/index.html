@@ -13,13 +13,67 @@
 <body>
   <div class="container">
     <div class="row">
+      <div class="col-9">
+        <div id="leftscreen" class="row">
+          <!--aquí se mostrarán todos-->
+        </div>
+      </div>
+      <div  id="rightscreen" class="col-2 background-warning ms-5 text-capitalize">
+        <ul class='border border-5 px-3 border-danger list-unstyled'>
+          <li class=" text-uppercase fw-bold">
+            <span id="name"></span> <!--nombre-->
+          </li>
+          <li>Normal <!--sprite normal-->
+            <span id="normal"></span>
+            <hr>
+          </li>
+          <li>Shiny <!--sprite shiny-->
+            <span id="shiny"></span>
+          </li>
+          <hr>
+          <li class="text-left">Tipo: <!--tipo-->
+            <ul class='ms-0' id="type"></ul>
+          </li>
+          <li class="text-left">Altura: <!--altura-->
+            <span id="height"></span>0 cm
+          </li>
+          <li class="text-left">Peso: <!--peso-->
+            <span id="weight"></span>00 gr
+          </li>
+        </ul>
+      </div>
     </div>
   </div>
   <script>
-    $(document).ready(function(){
-      for (var i=1; i<152; i++){
-      $('.row').append(`<div class="col-2"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/${i}.png"></div>`);
-      }});
+    for (let i=1; i<152; i++){
+      $('#leftscreen').append(`<div class="col-1"><img id="${i}" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${i}.png"></div>`);
+    };
+
+    
+    $('img').on('click', function(){
+      const pokeid = $(this).attr('id');
+      console.log(pokeid);
+      
+      $.get('http://pokeapi.co/api/v2/pokemon/'+ pokeid +'/', function(data){
+
+        console.log(data);
+
+        $('#name').html(data.name);
+
+        $('#normal').html(`<div class="col-1"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokeid}.png"></div>`);
+
+        $('#shiny').html(`<div class="col-1"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/${pokeid}.png"></div>`);
+
+        $('#height').html(data.height);
+
+        $('#weight').html(data.weight);
+
+        for (type of data.types) {
+          $('#type').append(`<li>${type.type.name}</li>`);
+        }
+      })
+    });
+
   </script>
 </body>
 </html>
